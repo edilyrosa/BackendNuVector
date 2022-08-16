@@ -23,8 +23,8 @@ router.get("/:id", async (req, res) => {
 //?This metho CREATE a Activity.
 router.post("/", async (req, res) => {
   const activity = req.body; //Request of
-  await Activity.create(activity);
-  res.json(activity); //Response
+  const created = await Activity.create(activity);
+  res.json(created); //Response
 });
 
 //?This metho UPDATE a Activity.

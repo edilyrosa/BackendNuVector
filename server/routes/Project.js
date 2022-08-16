@@ -24,8 +24,8 @@ router.get("/:id", async (req, res) => {
 //?This metho CREATE a Project.
 router.post("/", async (req, res) => {
   const project = req.body; //Request of
-  await Project.create(project);
-  res.json(project); //Response
+  const created = await Project.create(project);
+  res.json(created); //Response
 });
 
 //?This metho UPDATE a Project.

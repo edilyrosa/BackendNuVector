@@ -23,8 +23,8 @@ router.get("/:id", async (req, res) => {
 //?This metho CREATE a Product.
 router.post("/", async (req, res) => {
   const product = req.body; //Request of
-  await Product.create(product);
-  res.json(product); //Response
+  const created = await Product.create(product);
+  res.json(created); //Response
 });
 
 //?This metho UPDATE a Product.

@@ -23,8 +23,8 @@ router.get("/:id", async (req, res) => {
 //?This metho CREATE a Contractor.
 router.post("/", async (req, res) => {
   const contractor = req.body; //Request of
-  await Contractor.create(contractor);
-  res.json(contractor); //Response
+  const created = await Contractor.create(contractor);
+  res.json(created); //Response
 });
 
 //?This metho UPDATE a Contractor.
