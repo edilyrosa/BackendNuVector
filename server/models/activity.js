@@ -15,11 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "taskentries",
       });
 
-      Activity.belongsToMany(models.Project, {
-        through: "Projectactivities",
-        as: "projects",
-        foreignKey: "activity_id",
-      });
+      Activity.belongsTo(models.Project, { foreignKey: "project_id" });
 
       Activity.belongsToMany(models.Category, {
         through: "activitycategories",
@@ -32,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       description: DataTypes.STRING,
       active: DataTypes.STRING,
+      project_id: DataTypes.INTEGER,
     },
     {
       sequelize,

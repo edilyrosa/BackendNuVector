@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      ClientId: {
-        type: Sequelize.INTEGER, //LA ESTOY CREANDO A MANO
-      },
       client_id: {
         type: Sequelize.INTEGER,
         references: {

@@ -9,11 +9,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Project.belongsTo(models.Client);
+      Project.belongsTo(models.Client, {
+        foreignKey: "client_id",
+      });
 
       Project.hasMany(models.Taskentry, {
         foreignKey: "project_id",
         as: "taskentries",
+      });
+
+      Project.hasMany(models.Activity, {
+        foreignKey: "project_id",
+        as: "activities",
       });
 
       Project.belongsToMany(models.Product, {
@@ -21,17 +28,10 @@ module.exports = (sequelize, DataTypes) => {
         as: "product",
         foreignKey: "project_id",
       });
-
-      Project.belongsToMany(models.Activity, {
-        through: "Projectactivities",
-        as: "activities",
-        foreignKey: "project_id",
-      });
     }
   }
   Project.init(
     {
-      ClientId: DataTypes.INTEGER, //LA ESTOY CREANDO A MANO
       client_id: DataTypes.INTEGER,
       name: DataTypes.STRING,
       description: DataTypes.STRING,

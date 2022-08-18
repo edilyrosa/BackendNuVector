@@ -9,23 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Taskentry.belongsTo(models.Client);
-      Taskentry.belongsTo(models.Project);
-      Taskentry.belongsTo(models.Contractor);
-      Taskentry.belongsTo(models.Product);
-      Taskentry.belongsTo(models.Activity);
-      Taskentry.belongsTo(models.Category);
+      Taskentry.belongsTo(models.Client, { foreignKey: "client_id" });
+      Taskentry.belongsTo(models.Project, { foreignKey: "project_id" });
+      Taskentry.belongsTo(models.Contractor, { foreignKey: "contractor_id" });
+      Taskentry.belongsTo(models.Product, { foreignKey: "product_id" });
+      Taskentry.belongsTo(models.Activity, { foreignKey: "activity_id" });
+      Taskentry.belongsTo(models.Category, { foreignKey: "category_id" });
     }
   }
   Taskentry.init(
     {
-      ClientId: DataTypes.INTEGER, //LA ESTOY CREANDO A MANO
-      ProjectId: DataTypes.INTEGER, //LA ESTOY CREANDO A MANO
-      ContractorId: DataTypes.INTEGER, //LA ESTOY CREANDO A MANO
-      ProductId: DataTypes.INTEGER, //LA ESTOY CREANDO A MANO
-      ActivityId: DataTypes.INTEGER, //LA ESTOY CREANDO A MANO
-      CategoryId: DataTypes.INTEGER, //LA ESTOY CREANDO A MANO
-
       contractor_id: DataTypes.INTEGER,
       date: DataTypes.DATEONLY,
       duration: DataTypes.DECIMAL(11, 10), //!arreglarlo!!,

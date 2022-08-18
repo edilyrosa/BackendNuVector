@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Activity } = require("../models");
+const { Activity, Contractor } = require("../models");
 
 //?ENDPOINT: http://localhost:5000/activity
 

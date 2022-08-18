@@ -1,12 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const { Taskentry } = require("../models");
+const {
+  Taskentry,
+  Contractor,
+  Client,
+  Activity,
+  Product,
+  Category,
+  Project,
+} = require("../models");
+const activity = require("../models/activity");
 
 //?ENDPOINT: http://localhost:3002/taskentry
 
 //?This getAll Taskentry.
 router.get("/", async (req, res) => {
-  const listOfTaskentries = await Taskentry.findAll();
+  const listOfTaskentries = await Taskentry.findAll({
+    include: [Contractor, Client, Project, Product, Activity, Category],
+  });
   res.json(listOfTaskentries);
 });
 

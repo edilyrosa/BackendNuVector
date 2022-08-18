@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { Project } = require("../models");
+const { Project, Client } = require("../models");
 
 //?ENDPOINT: http://localhost:3002/project
 
 //?This getAll Projects
 
 router.get("/", async (req, res) => {
-  const listOfProjects = await Project.findAll();
+  const listOfProjects = await Project.findAll({
+    include: [Client],
+  });
   res.json(listOfProjects);
 });
 
@@ -20,6 +22,20 @@ router.get("/:id", async (req, res) => {
   }
   res.json(project);
 });
+
+//TODO::::::::DATA PROJECT FULL con nombre cliente
+// router.get("/project", async (req, res) => {
+//   const ClientProject = await sequelize.query(
+//     "select clients.name as client_name, clients.id as client_id, projects.id as project_id, projects.name as project_name from clients, projects where clients.id=projects.client_id;",
+//     {
+//       type: sequelize.QueryTypes.SELECT,
+//     }
+//   );
+//   if (ClientProject === null) {
+//     res.send("Info does not exist, ERROR 400");
+//   }
+//   res.json(ClientProject);
+// });
 
 //?This metho CREATE a Project.
 router.post("/", async (req, res) => {

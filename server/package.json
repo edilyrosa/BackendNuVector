@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "create": "sequelize-cli db:create",
+    "migration": "sequelize-cli db:migrate",
     "start": "nodemon index.js"
   },
   "keywords": [],
