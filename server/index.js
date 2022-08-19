@@ -32,6 +32,3 @@ const routerTaskentry = require("./routes/Taskentry");
 app.use("/taskentry", routerTaskentry);
 app.use(cors());
 app.listen(5000, () => console.log("Server running on port 5000"));
-//db.sequelize.sync().then(() => {
-//Start the API in a PORT
-//});

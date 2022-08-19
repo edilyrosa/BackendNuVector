@@ -34,7 +34,10 @@ router.get("/:id", async (req, res) => {
 //?This metho CREATE a Taskentry.
 router.post("/", async (req, res) => {
   const taskentry = req.body; //Request of
-  const created = await Taskentry.create(taskentry);
+  const { id } = await Taskentry.create(taskentry);
+  const created = await Taskentry.findByPk(id, {
+    include: [Contractor, Client, Project, Product, Activity, Category],
+  });
   res.json(created); //Response
 });
 

@@ -23,24 +23,13 @@ router.get("/:id", async (req, res) => {
   res.json(project);
 });
 
-//TODO::::::::DATA PROJECT FULL con nombre cliente
-// router.get("/project", async (req, res) => {
-//   const ClientProject = await sequelize.query(
-//     "select clients.name as client_name, clients.id as client_id, projects.id as project_id, projects.name as project_name from clients, projects where clients.id=projects.client_id;",
-//     {
-//       type: sequelize.QueryTypes.SELECT,
-//     }
-//   );
-//   if (ClientProject === null) {
-//     res.send("Info does not exist, ERROR 400");
-//   }
-//   res.json(ClientProject);
-// });
-
 //?This metho CREATE a Project.
 router.post("/", async (req, res) => {
   const project = req.body; //Request of
-  const created = await Project.create(project);
+  const { id } = await Project.create(project);
+  const created = await Project.findByPk(id, {
+    include: [Client],
+  });
   res.json(created); //Response
 });
 
