@@ -1,3 +1,4 @@
+const { QueryTypes } = require("sequelize");
 const express = require("express");
 const router = express.Router();
 const {
@@ -31,10 +32,30 @@ router.get("/:id", async (req, res) => {
   res.json(taskentry);
 });
 
+//////////////////////////////////////////////////
+
+// //?This get hours by project.
+// router.get("/:id", async (req, res) => {
+//   const id = req.params.id.substring(1);
+//   const hoursPerProject = await sequelize.query(
+//     `SELECT SUM(duration) AS total_h FROM taskentries WHERE client_id='${id}" GROUP BY project_id`,
+//     {
+//       type: QueryTypes.SELECT,
+//     }
+//   );
+//   if (hoursPerProject === null) {
+//     res.send("Taskentry does not exist, ERROR 400");
+//   }
+//   res.json(hoursPerProject);
+// });
+
+//////////////////////////////////////////////////////////
+
 //?This metho CREATE a Taskentry.
 router.post("/", async (req, res) => {
   const taskentry = req.body; //Request of
   const { id } = await Taskentry.create(taskentry);
+
   const created = await Taskentry.findByPk(id, {
     include: [Contractor, Client, Project, Product, Activity, Category],
   });
