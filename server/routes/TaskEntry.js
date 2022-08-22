@@ -12,7 +12,7 @@ const {
 } = require("../models");
 const activity = require("../models/activity");
 
-//?ENDPOINT: http://localhost:3002/taskentry
+//?ENDPOINT: http://localhost:5000/taskentry
 
 //?This getAll Taskentry.
 router.get("/", async (req, res) => {
@@ -25,31 +25,12 @@ router.get("/", async (req, res) => {
 //?This get one Taskentry.
 router.get("/:id", async (req, res) => {
   const id = req.params.id.substring(1);
-  const taskentry = await Taskentry.findByPk(id); //!NO SE SI AL CONSULIR ESTE ENDPOINT NECESITARE ESTOS : QUE ESTOY BORRANDO DE LA URL
+  const taskentry = await Taskentry.findByPk(id);
   if (taskentry === null) {
     res.send("Taskentry does not exist, ERROR 400");
   }
   res.json(taskentry);
 });
-
-//////////////////////////////////////////////////
-
-// //?This get hours by project.
-// router.get("/:id", async (req, res) => {
-//   const id = req.params.id.substring(1);
-//   const hoursPerProject = await sequelize.query(
-//     `SELECT SUM(duration) AS total_h FROM taskentries WHERE client_id='${id}" GROUP BY project_id`,
-//     {
-//       type: QueryTypes.SELECT,
-//     }
-//   );
-//   if (hoursPerProject === null) {
-//     res.send("Taskentry does not exist, ERROR 400");
-//   }
-//   res.json(hoursPerProject);
-// });
-
-//////////////////////////////////////////////////////////
 
 //?This metho CREATE a Taskentry.
 router.post("/", async (req, res) => {
