@@ -37,9 +37,9 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const id = req.params.id.substring(1);
   //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
-  const updateProject = req.body;
+  let updateProject = req.body;
 
-  const newpro = await Project.update(
+  await Project.update(
     {
       //Table's fields to UPDATE.
       client_id: updateProject.client_id,
@@ -53,6 +53,11 @@ router.put("/:id", async (req, res) => {
       },
     }
   );
+
+  updateProject = await Project.findByPk(id, {
+    include: [Client],
+  });
+
   res.json(updateProject);
 });
 

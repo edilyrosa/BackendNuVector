@@ -9,8 +9,8 @@ const {
   Product,
   Category,
   Project,
+  sequelize,
 } = require("../models");
-const activity = require("../models/activity");
 
 //?ENDPOINT: http://localhost:5000/taskentry
 
@@ -32,6 +32,27 @@ router.get("/:id", async (req, res) => {
   res.json(taskentry);
 });
 
+//////////////////////////////////////////////////
+
+//?This get hours by project.
+router.get("/hours/:id", async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const hoursPerProject = await sequelize.query(
+    `SELECT SUM(duration) AS total_h, projects.id as project_id, projects.name as project_name FROM taskentries LEFT JOIN projects ON taskentries.project_id = projects.id WHERE taskentries.client_id = :clientId GROUP BY project_id`,
+    {
+      replacements: { clientId: +id },
+      type: QueryTypes.SELECT,
+    }
+  );
+  if (hoursPerProject === null) {
+    res.send("Taskentry does not exist, ERROR 400");
+  }
+  res.json(hoursPerProject);
+});
+
+//////////////////////////////////////////////////////////
+
 //?This metho CREATE a Taskentry.
 router.post("/", async (req, res) => {
   const taskentry = req.body; //Request of
@@ -47,7 +68,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const id = req.params.id.substring(1);
   //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
-  const updateTaskentry = req.body;
+  let updateTaskentry = req.body;
 
   await Taskentry.update(
     {
@@ -70,6 +91,10 @@ router.put("/:id", async (req, res) => {
       },
     }
   );
+
+  updateTaskentry = await Taskentry.findByPk(id, {
+    include: [Contractor, Client, Project, Product, Activity, Category],
+  });
   res.json(updateTaskentry);
 });
 
