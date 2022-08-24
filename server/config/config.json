@@ -1,24 +1,45 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "nuvertor_project_db",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "wilckbgmboquca",
+    "password": "79303ab22f3e2d3231a50c3f427dc3150213efc02e809bbdb732c217e66595f0",
+    "database": "d55s2e0jg6jesu",
+    "host": "ec2-54-159-175-38.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "protocol": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
 
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "nuvertor_project_db",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "wilckbgmboquca",
+    "password": "79303ab22f3e2d3231a50c3f427dc3150213efc02e809bbdb732c217e66595f0",
+    "database": "d55s2e0jg6jesu",
+    "host": "ec2-54-159-175-38.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "protocol": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "nuvertor_project_db",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "wilckbgmboquca",
+    "password": "79303ab22f3e2d3231a50c3f427dc3150213efc02e809bbdb732c217e66595f0",
+    "database": "d55s2e0jg6jesu",
+    "host": "ec2-54-159-175-38.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "protocol": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }
