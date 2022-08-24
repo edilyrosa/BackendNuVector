@@ -9,9 +9,11 @@ const config = require(__dirname + "/../config/config.json")[env];
 const db = {};
 
 let sequelize;
-console.log(config)
+console.log(config);
 sequelize = new Sequelize(
-  "postgres://wilckbgmboquca:79303ab22f3e2d3231a50c3f427dc3150213efc02e809bbdb732c217e66595f0@ec2-54-159-175-38.compute-1.amazonaws.com:5432/d55s2e0jg6jesu",
+  config.database,
+  config.username,
+  config.password,
   config
 );
 
