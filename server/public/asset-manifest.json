@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0617ddf6.css",
+    "main.js": "/static/js/main.71172a72.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/techTwo.jpg": "/static/media/techTwo.787b14cc23aca8ec27d9.jpg",
+    "static/media/nuvector-logo.jpg": "/static/media/nuvector-logo.cfb83ea364eaa965971c.jpg",
+    "static/media/nuVector_favicon.ico": "/static/media/nuVector_favicon.b67f5565a592218f6daf.ico",
+    "index.html": "/index.html",
+    "main.0617ddf6.css.map": "/static/css/main.0617ddf6.css.map",
+    "main.71172a72.js.map": "/static/js/main.71172a72.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0617ddf6.css",
+    "static/js/main.71172a72.js"
+  ]
+}

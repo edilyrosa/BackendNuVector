@@ -6,29 +6,34 @@ const db = require("./models"); //db represents the BBDD
 
 app.use(express.urlencoded({ extended: true })); //MiddleWare
 app.use(express.json());
+app.use(express.static("public"));
 app.use(cors(config.application.cors.server));
+
+const router = express.Router();
 
 //Routers:
 const routerClient = require("./routes/Client");
-app.use("/client", routerClient);
+router.use("/client", routerClient);
 
 const routerProject = require("./routes/Project");
-app.use("/project", routerProject);
+router.use("/project", routerProject);
 
 const routerContractor = require("./routes/Contractor");
-app.use("/contractor", routerContractor);
+router.use("/contractor", routerContractor);
 
 const routerProduct = require("./routes/Product");
-app.use("/product", routerProduct);
+router.use("/product", routerProduct);
 
 const routerActivity = require("./routes/activity");
-app.use("/activity", routerActivity);
+router.use("/activity", routerActivity);
 
 const routerCategory = require("./routes/Category");
-app.use("/category", routerCategory);
+router.use("/category", routerCategory);
 
 const routerTaskentry = require("./routes/TaskEntry");
-app.use("/taskentry", routerTaskentry);
+router.use("/taskentry", routerTaskentry);
+
+app.use("/api", router);
 app.listen(process.env.PORT || 5000, () =>
   console.log("Server running on port 5000")
 );
