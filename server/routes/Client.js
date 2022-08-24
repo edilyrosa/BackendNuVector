@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Client, Category } = require("../models");
+const { Client } = require("../models");
 
 //?ENDPOINT: http://localhost:3002/client
 
@@ -23,7 +23,7 @@ router.get("/:id", async (req, res) => {
 //?This metho CREATE a Client.
 router.post("/", async (req, res) => {
   const client = req.body; //Request of
-  const created = await Category.create(client);
+  const created = await Client.create(client);
   res.json(created); //Response
 });
 
