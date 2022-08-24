@@ -34,6 +34,15 @@ const routerTaskentry = require("./routes/TaskEntry");
 router.use("/taskentry", routerTaskentry);
 
 app.use("/api", router);
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "public/index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
 app.listen(process.env.PORT || 5000, () =>
   console.log("Server running on port 5000")
 );
