@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 
 //?This get one Activity.
 router.get("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   const activity = await Activity.findByPk(id); //!NO SE SI AL CONSULIR ESTE ENDPOINT NECESITARE ESTOS : QUE ESTOY BORRANDO DE LA URL
   if (activity === null) {
     res.send("Activity was does not exist, ERROR 400");
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 
 //?This metho UPDATE a Activity.
 router.put("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
   const updateActivity = req.body;
 
@@ -51,7 +51,7 @@ router.put("/:id", async (req, res) => {
 
 //?This metho DELETE a Activity
 router.delete("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   const deleteActivity = req.body;
   await Activity.destroy({
     where: {

@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 
 //?This get one Project
 router.get("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   const project = await Project.findByPk(id); //!NO SE SI AL CONSULIR ESTE ENDPOINT NECESITARE ESTOS : QUE ESTOY BORRANDO DE LA URL
   if (project === null) {
     res.send("Project does not exist, ERROR 400");
@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
 
 //?This metho UPDATE a Project.
 router.put("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
   let updateProject = req.body;
 
@@ -63,7 +63,7 @@ router.put("/:id", async (req, res) => {
 
 //?This metho DELETE a Project.
 router.delete("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   const deleteProject = req.body;
   await Project.destroy({
     where: {

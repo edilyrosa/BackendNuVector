@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 
 //?This get one Taskentry.
 router.get("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   const taskentry = await Taskentry.findByPk(id);
   if (taskentry === null) {
     res.send("Taskentry does not exist, ERROR 400");
@@ -66,7 +66,7 @@ router.post("/", async (req, res) => {
 
 //?This metho UPDATE a Taskentry.
 router.put("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
   let updateTaskentry = req.body;
 
@@ -100,7 +100,7 @@ router.put("/:id", async (req, res) => {
 
 //?This metho DELETE a Taskentry.
 router.delete("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   const deleteTaskentry = req.body;
   await Taskentry.destroy({
     where: {

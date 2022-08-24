@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 
 //?This get one Contractor
 router.get("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   const contractor = await Contractor.findByPk(id); //!NO SE SI AL CONSULIR ESTE ENDPOINT NECESITARE ESTOS : QUE ESTOY BORRANDO DE LA URL
   if (contractor === null) {
     res.send("Contractor was does not exist, ERROR 400");
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 
 //?This metho UPDATE a Contractor.
 router.put("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
   const updateContractor = req.body;
 
@@ -53,7 +53,7 @@ router.put("/:id", async (req, res) => {
 
 //?This metho DELETE a Contractor.
 router.delete("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   const deleteContractor = req.body;
   await Contractor.destroy({
     where: {

@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 
 //?This get one Client
 router.get("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   const client = await Client.findByPk(id); //!NO SE SI AL CONSULIR ESTE ENDPOINT NECESITARE ESTOS : QUE ESTOY BORRANDO DE LA URL
   if (client === null) {
     res.send("Client was does not exist, ERROR 400");
@@ -29,10 +29,9 @@ router.post("/", async (req, res) => {
 
 //?This metho UPDATE a Client.
 router.put("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
   const updateClient = req.body;
-
   await Client.update(
     {
       //Table's fields to UPDATE.
@@ -54,7 +53,7 @@ router.put("/:id", async (req, res) => {
 
 //?This metho DELETE a Client.
 router.delete("/:id", async (req, res) => {
-  const id = req.params.id.substring(1);
+  const id = req.params.id;
   const deleteClient = req.body;
   await Client.destroy({
     where: {
