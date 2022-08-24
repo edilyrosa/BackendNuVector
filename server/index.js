@@ -2,6 +2,7 @@ const express = require("express");
 const app = express(); //Express
 const cors = require("cors"); //Conexion con FRONT
 const config = require("./config");
+const path = require('path')
 const db = require("./models"); //db represents the BBDD
 
 app.use(express.urlencoded({ extended: true })); //MiddleWare
