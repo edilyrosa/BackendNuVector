@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Taskentry",
+      modelName: "taskentry",
     }
   );
   return Taskentry;
