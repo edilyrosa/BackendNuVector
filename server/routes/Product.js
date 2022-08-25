@@ -6,59 +6,76 @@ const { Product } = require("../models");
 
 //?This getAll Product
 router.get("/", async (req, res) => {
-  const listOfProducts = await Product.findAll();
-  res.json(listOfProducts);
+  try {
+    const listOfProducts = await Product.findAll();
+    res.json(listOfProducts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 //?This get one Product
 router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const product = await Product.findByPk(id); //!NO SE SI AL CONSULIR ESTE ENDPOINT NECESITARE ESTOS : QUE ESTOY BORRANDO DE LA URL
-  if (product === null) {
-    res.send("Product was does not exist, ERROR 400");
+  try {
+    const id = req.params.id;
+    const product = await Product.findByPk(id);
+    res.json(product);
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.json(product);
 });
 
 //?This metho CREATE a Product.
 router.post("/", async (req, res) => {
-  const product = req.body; //Request of
-  const created = await Product.create(product);
-  res.json(created); //Response
+  try {
+    const product = req.body; //Request of
+    const created = await Product.create(product);
+    res.json(created); //Response
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 //?This metho UPDATE a Product.
 router.put("/:id", async (req, res) => {
-  const id = req.params.id;
-  //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
-  const updateProduct = req.body;
+  try {
+    const id = req.params.id;
+    //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
+    const updateProduct = req.body;
 
-  await Product.update(
-    {
-      //Table's fields to UPDATE.
+    await Product.update(
+      {
+        //Table's fields to UPDATE.
 
-      description: updateProduct.description,
-      active: updateProduct.active,
-    },
-    {
-      where: {
-        id, //Indicator to do UPDATE
+        description: updateProduct.description,
+        active: updateProduct.active,
       },
-    }
-  );
-  res.json(updateProduct);
+      {
+        where: {
+          id, //Indicator to do UPDATE
+        },
+      }
+    );
+    res.json(updateProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 //?This metho DELETE a Product.
 router.delete("/:id", async (req, res) => {
-  const id = req.params.id;
-  const deleteProduct = req.body;
-  await Product.destroy({
-    where: {
-      id,
-    },
-  });
-  res.send(`Product was DETELED`);
+  try {
+    const id = req.params.id;
+    const deleteProduct = req.body;
+    await Product.destroy({
+      where: {
+        id,
+      },
+    });
+    res.send(`Product was DETELED`);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router; //To access this Router in index.js of folder "models" of the tabls.

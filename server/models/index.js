@@ -16,6 +16,7 @@ sequelize = new Sequelize(
   config.password,
   config
 );
+//sequelize.sync(); //!Recuerda esto
 
 fs.readdirSync(__dirname)
   .filter((file) => {

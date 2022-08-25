@@ -2,75 +2,90 @@ const express = require("express");
 const router = express.Router();
 const { Project, Client } = require("../models");
 
-//?ENDPOINT: http://localhost:3002/project
+//?ENDPOINT: http://localhost:5000/project
 
 //?This getAll Projects
 
 router.get("/", async (req, res) => {
-  const listOfProjects = await Project.findAll({
-    include: [Client],
-  });
-  res.json(listOfProjects);
+  try {
+    const listOfProjects = await Project.findAll({
+      include: [Client],
+    });
+    res.json(listOfProjects);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 //?This get one Project
 router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const project = await Project.findByPk(id); //!NO SE SI AL CONSULIR ESTE ENDPOINT NECESITARE ESTOS : QUE ESTOY BORRANDO DE LA URL
-  if (project === null) {
-    res.send("Project does not exist, ERROR 400");
+  try {
+    const id = req.params.id;
+    const project = await Project.findByPk(id);
+    res.json(project);
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.json(project);
 });
 
 //?This metho CREATE a Project.
 router.post("/", async (req, res) => {
-  const project = req.body; //Request of
-  const { id } = await Project.create(project);
-  const created = await Project.findByPk(id, {
-    include: [Client],
-  });
-  res.json(created); //Response
+  try {
+    const project = req.body; //Request of
+    const { id } = await Project.create(project);
+    const created = await Project.findByPk(id, {
+      include: [Client],
+    });
+    res.json(created); //Response
+  } catch (error) {
+    res.status(500).json(err);
+  }
 });
 
 //?This metho UPDATE a Project.
 router.put("/:id", async (req, res) => {
-  const id = req.params.id;
-  //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
-  let updateProject = req.body;
-
-  await Project.update(
-    {
-      //Table's fields to UPDATE.
-      client_id: updateProject.client_id,
-      name: updateProject.name,
-      description: updateProject.description,
-      active: updateProject.active,
-    },
-    {
-      where: {
-        id, //Indicator to do UPDATE
+  try {
+    const id = req.params.id;
+    let updateProject = req.body;
+    await Project.update(
+      {
+        //Table's fields to UPDATE.
+        client_id: updateProject.client_id,
+        name: updateProject.name,
+        description: updateProject.description,
+        active: updateProject.active,
       },
-    }
-  );
+      {
+        where: {
+          id, //Indicator to do UPDATE
+        },
+      }
+    );
 
-  updateProject = await Project.findByPk(id, {
-    include: [Client],
-  });
+    updateProject = await Project.findByPk(id, {
+      include: [Client],
+    });
 
-  res.json(updateProject);
+    res.json(updateProject);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 //?This metho DELETE a Project.
 router.delete("/:id", async (req, res) => {
-  const id = req.params.id;
-  const deleteProject = req.body;
-  await Project.destroy({
-    where: {
-      id,
-    },
-  });
-  res.send(`Project was DETELED`);
+  try {
+    const id = req.params.id;
+    const deleteProject = req.body;
+    await Project.destroy({
+      where: {
+        id,
+      },
+    });
+    res.send(`Project was DETELED`);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router; //To access this Router in index.js of folder "models" of the tabls.

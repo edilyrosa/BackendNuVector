@@ -1,3 +1,4 @@
+/*
 const express = require("express");
 const router = express.Router();
 const { getAll } = require("./FunctionsCRUD");
@@ -10,7 +11,7 @@ getAll("/", Category, async(req, res));
 //?This get one Category.
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  const category = await Category.findByPk(id); //!NO SE SI AL CONSULIR ESTE ENDPOINT NECESITARE ESTOS : QUE ESTOY BORRANDO DE LA URL
+  const category = await Category.findByPk(id);
   if (category === null) {
     res.send("Category was does not exist, ERROR 400");
   }
@@ -27,7 +28,7 @@ router.post("/", async (req, res) => {
 //?This metho UPDATE a Category.
 router.put("/:id", async (req, res) => {
   const id = req.params.id;
-  //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
+
   const updateCategory = req.body;
 
   await Category.update(
@@ -59,3 +60,5 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports = router; //To access this Router in index.js of folder "models" of the tabls.
+
+*/

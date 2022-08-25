@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       contractor_id: DataTypes.INTEGER,
       date: DataTypes.DATEONLY,
-      duration: DataTypes.DECIMAL(11, 10), //!arreglarlo!!,
+      //duration: DataTypes.DECIMAL(11, 10), //!arreglarlo!!,
+      duration: DataTypes.INTEGER, //!este cambio no esta en migracion aun, sino el de la linea anterior
       billable: DataTypes.BOOLEAN,
       project_id: DataTypes.INTEGER,
       client_id: DataTypes.INTEGER,

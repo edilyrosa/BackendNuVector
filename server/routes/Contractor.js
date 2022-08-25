@@ -6,61 +6,76 @@ const { Contractor } = require("../models");
 
 //?This getAll Contractors
 router.get("/", async (req, res) => {
-  const listOfContractors = await Contractor.findAll();
-  res.json(listOfContractors);
+  try {
+    const listOfContractors = await Contractor.findAll();
+    res.json(listOfContractors);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 //?This get one Contractor
 router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const contractor = await Contractor.findByPk(id); //!NO SE SI AL CONSULIR ESTE ENDPOINT NECESITARE ESTOS : QUE ESTOY BORRANDO DE LA URL
-  if (contractor === null) {
-    res.send("Contractor was does not exist, ERROR 400");
+  try {
+    const id = req.params.id;
+    const contractor = await Contractor.findByPk(id);
+    res.json(contractor);
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.json(contractor);
 });
 
 //?This metho CREATE a Contractor.
 router.post("/", async (req, res) => {
-  const contractor = req.body; //Request of
-  const created = await Contractor.create(contractor);
-  res.json(created); //Response
+  try {
+    const contractor = req.body; //Request of
+    const created = await Contractor.create(contractor);
+    res.json(created); //Response
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 //?This metho UPDATE a Contractor.
 router.put("/:id", async (req, res) => {
-  const id = req.params.id;
-  //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
-  const updateContractor = req.body;
-
-  await Contractor.update(
-    {
-      //Table's fields to UPDATE.
-      fullname: updateContractor.fullname,
-      gender: updateContractor.gender,
-      birthyear: updateContractor.birthyear,
-      country_residence: updateContractor.country_residence,
-      active: updateContractor.active,
-    },
-    {
-      where: {
-        id, //Indicator to do UPDATE
+  try {
+    const id = req.params.id;
+    const updateContractor = req.body;
+    await Contractor.update(
+      {
+        //Table's fields to UPDATE.
+        fullname: updateContractor.fullname,
+        gender: updateContractor.gender,
+        birthyear: updateContractor.birthyear,
+        country_residence: updateContractor.country_residence,
+        active: updateContractor.active,
       },
-    }
-  );
-  res.json(updateContractor);
+      {
+        where: {
+          id, //Indicator to do UPDATE
+        },
+      }
+    );
+    res.json(updateContractor);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 //?This metho DELETE a Contractor.
 router.delete("/:id", async (req, res) => {
-  const id = req.params.id;
-  const deleteContractor = req.body;
-  await Contractor.destroy({
-    where: {
-      id,
-    },
-  });
-  res.send(`Contractor was DETELED`);
+  try {
+    const id = req.params.id;
+    const deleteContractor = req.body;
+    await Contractor.destroy({
+      where: {
+        id,
+      },
+    });
+    res.send(`Contractor was DETELED`);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router; //To access this Router in index.js of folder "models" of the tabls.

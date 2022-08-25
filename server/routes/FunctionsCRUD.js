@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 const { Project } = require("../models");
@@ -18,7 +19,7 @@ async function getAll(router, path, model) {
 //?This get one Project
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  const project = await Project.findByPk(id); //!NO SE SI AL CONSULIR ESTE ENDPOINT NECESITARE ESTOS : QUE ESTOY BORRANDO DE LA URL
+  const project = await Project.findByPk(id);
   if (project === null) {
     res.send("Project does not exist, ERROR 400");
   }
@@ -35,7 +36,6 @@ router.post("/", async (req, res) => {
 //?This metho UPDATE a Project.
 router.put("/:id", async (req, res) => {
   const id = req.params.id;
-  //!COMO CONTROLAR QUE ID ENVIADO NO EXISTE, NO SE SI PUEDA OCURRIR ??
   const updateProject = req.body;
 
   await Project.update(
@@ -69,3 +69,5 @@ router.delete("/:id", async (req, res) => {
 
 module.exports = router; //To access this Router in index.js of folder "models" of the tabls.
 export { getAll };
+
+
