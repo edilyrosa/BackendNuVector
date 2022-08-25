@@ -43,7 +43,7 @@ router.get("/hours/:id", async (req, res) => {
     const id = req.params.id;
     console.log(id);
     const hoursPerProject = await sequelize.query(
-      `SELECT SUM(duration) AS total_h, projects.id as project_id, projects.name as project_name FROM taskentries LEFT JOIN projects ON taskentries.project_id = projects.id WHERE taskentries.client_id = :clientId GROUP BY project_id`,
+      `SELECT SUM(duration) AS total_h, projects.id as project_id, projects.name as project_name FROM "Taskentries" LEFT JOIN "Projects" as projects ON "Taskentries".project_id = projects.id WHERE "Taskentries".client_id = :clientId GROUP BY projects.id`,
       {
         replacements: { clientId: +id },
         type: QueryTypes.SELECT,
