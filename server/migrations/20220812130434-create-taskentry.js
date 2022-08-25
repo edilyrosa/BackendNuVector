@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Taskentries", {
+    await queryInterface.createTable("taskentries", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -109,6 +109,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Taskentries");
+    await queryInterface.dropTable("taskentries");
   },
 };
